@@ -70,7 +70,7 @@ void motorControl(){
 
 void motorControlPhased(){
   int startIndex = 4;
-  for(int i = startIndex; (i + 1) % numberOfAngles != startIndex; i = (i + 1) % numberOfAngles){
+  for(int i = startIndex; i != startIndex - 1; i++){
   myServo4.write(servoAngle1[i] + offsetAngle);      //Set the angles of the servos to the correct parameter in the array
   myServo5.write(servoAngle2[i] + offsetAngle);
   myServo6.write(servoAngle3[i] + offsetAngle);
@@ -81,6 +81,10 @@ void motorControlPhased(){
   Serial.print(servoAngle2[i]);
   Serial.print(", "); 
   Serial.println(servoAngle3[i]);
+ if(i == 22){
+   i = 0;
+  }
+
 
   }
 
