@@ -1,8 +1,17 @@
 # Changelog
 
+## [0.1.3] - 2025-04-06
+### Added
+- Control with millis function
+- Reconstructed phase shifted controller
+### Bugs
+- All positions not being utilized
+- Executing whole loop block
+
 ## [0.1.2] - 2025-04-06
 ### Added
 - Added new controller for other leg
+
 
 ## [0.1.1] - 2025-03-25
 ### Added
