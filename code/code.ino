@@ -8,7 +8,6 @@ Servo myServo5;
 Servo myServo6;
 const int numberOfAngles = 23;
 int offsetAngle = 90;
-int startDelay = 6000;
 int delayTime = 1500;
 unsigned long previousTime1 = 0;
 unsigned long previousTime2 = 0;
@@ -19,7 +18,6 @@ float servoAngle3[numberOfAngles] = {63.479, 68.659, 76.848, 82.928, 74.552, 73.
 
 void setup() {
   Serial.begin(9600);
-  unsigned long currentTime = millis(); 
   myServo1.attach(9); // Attach the servo to pin 9,10,11
   myServo2.attach(10);
   myServo3.attach(11);
@@ -31,23 +29,12 @@ void setup() {
 
 void loop()
 {
-  unsigned long currentTime = millis(); 
-  if( currentTime - previousTime1 >= delayTime ){
-  motorControl();
+ unsigned long currentTime = millis(); 
+   if( currentTime - previousTime1 >= delayTime ){
+  goForward();
 
   previousTime1 = currentTime;
-
  }
-  
-
-  if( currentTime >= startDelay ){
-    if( currentTime - previousTime2 >= delayTime ){
-    motorControlPhased();
-
-    previousTime2 = currentTime;
-
-    }
-  }
 
 }
 void resetServo() {
@@ -78,13 +65,27 @@ void motorControl(){
 
 void motorControlPhased(){
   int startIndex = 4;
-  for(int i = startIndex; i != startIndex - 1 ; i++){
- if(i == 23){
-   i = 0;
+  for(int i = startIndex; i<numberOfAngles+startIndex; i++){
+
+  myServo4.write(servoAngle1[i% numberOfAngles] + offsetAngle);      //Set the angles of the servos to the correct parameter in the array
+  myServo5.write(servoAngle2[i% numberOfAngles] + offsetAngle);
+  myServo6.write(servoAngle3[i% numberOfAngles] + offsetAngle);
+
+  Serial.print(servoAngle1[i% numberOfAngles]);        //Show the results in serial monitor
+  Serial.print(", "); 
+  Serial.print(servoAngle2[i% numberOfAngles]);
+  Serial.print(", "); 
+  Serial.println(servoAngle3[i% numberOfAngles]);
+
   }
-  myServo4.write(servoAngle1[i] + offsetAngle);      //Set the angles of the servos to the correct parameter in the array
-  myServo5.write(servoAngle2[i] + offsetAngle);
-  myServo6.write(servoAngle3[i] + offsetAngle);
+ }
+void goForward(){
+int j = 4;
+int i = 0;
+  while(i < numberOfAngles && ){
+  myServo1.write(servoAngle1[i] + offsetAngle);      //Set the angles of the servos to the correct parameter in the array
+  myServo2.write(servoAngle2[i] + offsetAngle);
+  myServo3.write(servoAngle3[i] + offsetAngle);
 
   Serial.print(servoAngle1[i]);        //Show the results in serial monitor
   Serial.print(", "); 
@@ -92,7 +93,23 @@ void motorControlPhased(){
   Serial.print(", "); 
   Serial.println(servoAngle3[i]);
 
-  
-  }
- }
+  myServo4.write(servoAngle1[j% numberOfAngles] + offsetAngle);      //Set the angles of the servos to the correct parameter in the array
+  myServo5.write(servoAngle2[j% numberOfAngles] + offsetAngle);
+  myServo6.write(servoAngle3[j% numberOfAngles] + offsetAngle);
 
+  Serial.print(servoAngle1[j% numberOfAngles]);        //Show the results in serial monitor
+  Serial.print(", "); 
+  Serial.print(servoAngle2[j% numberOfAngles]);
+  Serial.print(", "); 
+  Serial.println(servoAngle3[j% numberOfAngles]);
+  j++;
+  i++;
+  delay(1500);
+  
+}
+
+
+
+
+
+}

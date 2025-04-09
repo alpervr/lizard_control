@@ -1,4 +1,11 @@
 # Changelog
+## [0.1.4] - 2025-04-09
+### Added
+- New control function block
+- Changed logic of control
+### Bugs Fixed
+- All positions are used
+- Loop works correctly now
 
 ## [0.1.3] - 2025-04-06
 ### Added
