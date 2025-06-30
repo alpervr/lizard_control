@@ -1,4 +1,8 @@
 # Changelog
+## [0.1.5 - 2025-04-09
+### Added
+- Completed the full leg servo motor controllers
+
 ## [0.1.4] - 2025-04-09
 ### Added
 - New control function block
